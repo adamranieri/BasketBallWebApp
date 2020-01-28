@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Player Creator</title>
+</head>
+<body>
+    <h1>Player Creator</h1>
+
+    <h4>Name</h4>
+    <input type="text" id="nameinput">
+
+    <h4>Jersey</h4>
+    <input type="number" id="jerseyinput">
+
+    <h4>Team</h4>
+    <input type="text" id="teaminput">
+
+    <button onclick="createPlayer()">Add Player</button>
+
+    <div id="playerinfo">
+
+
+    </div>
+    
+</body>
+<script>
+
+function createPlayer(){
+
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(){
+        if(this.readyState === 4 && this.status === 200){
+            let player = JSON.parse(this.responseText);
+            document.getElementById("playerinfo").innerHTML = `
+            
+        <table>
+    <tr><th>id</th><th>name</th><th>jersey</th><th>team</th></tr>
+    <tr><td>${player.id}</td><td>${player.name}</td><td>${player.jersey}</td><td>${player.team}</td></tr>
+        </table>`
+        }
+    }
+
+    xhttp.open("POST","http://localhost:8080/BasketBallWebApp/addPlayer.do");
+    xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+
+    let player = new Object();
+    player.name = document.getElementById("nameinput").value;
+    player.jersey = document.getElementById("jerseyinput").value;
+    player.team = document.getElementById("teaminput").value;
+    player.id = 0;
+    let json = JSON.stringify(player);
+
+    xhttp.send(`payload=${json}`);
+}
+
+</script>
+
+</html>
