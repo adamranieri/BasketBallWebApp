@@ -28,7 +28,7 @@
             }
         }
 
-        xhttp.open("GET","http://localhost:8080/BasketBallWebApp/getAllPlayers.do")
+        xhttp.open("GET","http://ec2-54-210-157-37.compute-1.amazonaws.com:8080/BasketBallWebApp/getAllPlayers.do")
         xhttp.send();
     }
 
@@ -42,7 +42,7 @@
             }
         }
         let team = document.getElementById("teaminput").value;
-        xhttp.open("GET",`http://localhost:8080/BasketBallWebApp/getPlayersByTeam.do?team=${team}`)
+        xhttp.open("GET",`http://ec2-54-210-157-37.compute-1.amazonaws.com:8080/BasketBallWebApp/getPlayersByTeam.do?team=${team}`)
         xhttp.send();
     }
 
